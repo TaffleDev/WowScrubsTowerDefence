@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public EnemyHealth health;
+    public EnemyHealth attributesEnemy;
 
     //public float moveSpeed = 2f; 
 
@@ -23,13 +23,28 @@ public class Enemy : MonoBehaviour
         MoveAlongPath();
     }
 
+    public void TakeDamage(int damage)
+    {
+        attributesEnemy.health -= damage;
+
+        if (attributesEnemy.health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
+
     void MoveAlongPath()
     {
         if (wayPointIndex < pathWayPoints.Length)
         {
             Transform targetWayPoint = pathWayPoints[wayPointIndex];
             Vector3 direction = targetWayPoint.position - transform.position;
-            transform.Translate(direction.normalized * health.moveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(direction.normalized * attributesEnemy.moveSpeed * Time.deltaTime, Space.World);
 
             if (Vector3.Distance(transform.position, targetWayPoint.position) < 0.1f)
             {

@@ -5,7 +5,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public SpawnManagerScriptableObject spawnManager;
 
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefab;
     public Transform[] pathWayPoints;
     public float spawnIntervals = 2f;
 
